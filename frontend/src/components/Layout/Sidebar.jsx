@@ -4,6 +4,7 @@ import { Menu, Plus, ChevronLeft, X } from "lucide-react";
 import { TaskForm } from "../formCreateTask";
 import SearchFilter from "./SearchFilter";
 import SelectFilter from "./SelectFilter";
+import { CalendarRange } from "@/components/ui/CalendarRange";
 
 export function Sidebar({ setTasks, searchTerm, setSearchTerm, filter, onFilterChange }) {
   const [open, setOpen] = useState(false);
@@ -37,7 +38,7 @@ export function Sidebar({ setTasks, searchTerm, setSearchTerm, filter, onFilterC
       <aside
         className={`
           fixed md:relative z-50 md:z-auto
-          ${open ? "translate-x-0 w-64" : "-translate-x-full md:translate-x-0 md:w-[72px]"}
+          ${open ? "translate-x-0 w-80" : "-translate-x-full md:translate-x-0 md:w-[72px]"}
           h-screen bg-card border-r border-border transition-all duration-300 flex flex-col
         `}
       >
@@ -81,7 +82,18 @@ export function Sidebar({ setTasks, searchTerm, setSearchTerm, filter, onFilterC
         />
 
         {open && <SelectFilter filter={filter} onFilterChange={onFilterChange} />}
+        
+        {open && (
+          <div className="mt-auto p-3">
+            <p className="text-xs text-muted-foreground mb-2 px-1">Filtrar por fecha</p>
+            <CalendarRange 
+              className="rounded-xl border border-border bg-secondary/20 overflow-hidden"
+              onChange={setTasks}
+            />
+          </div>
+        )}
       </aside>
+      
 
       {isCreateOpen && (
         <div

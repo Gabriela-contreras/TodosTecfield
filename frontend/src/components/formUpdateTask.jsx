@@ -5,6 +5,11 @@ import { Label } from "@/components/ui/label"
 import { updateTaskService } from "@/services/updateTask"
 import { useNotification } from "@/hooks/useNotification"
 
+const formatDateForInput = (dateString) => {
+    if (!dateString) return ""
+    return new Date(dateString).toISOString().split("T")[0]
+}
+
 export function UpdateTaskForm({ task, onUpdate, onClose }) {
     const { success, error } = useNotification()
 
@@ -14,6 +19,7 @@ export function UpdateTaskForm({ task, onUpdate, onClose }) {
         const updatedData = {
             title: e.target.title.value,
             status: e.target.status.value,
+            deadline: e.target.deadline.value || null,
         }
 
         try {
@@ -54,11 +60,21 @@ export function UpdateTaskForm({ task, onUpdate, onClose }) {
                             name="status" 
                             id="status" 
                             defaultValue={task.status}
-                            className="bg-secondary border-border text-foreground placeholder:text-muted-foreground w-full h-9 rounded-md border px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none"
+                            className="bg-secondary border-border text-foreground w-full h-9 rounded-md border px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none"
                         >
                             <option value="pendiente">Pendiente</option>
                             <option value="completada">Completada</option>
                         </select>
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="deadline" className="text-foreground">Fecha límite</Label>
+                        <Input
+                            id="deadline"
+                            name="deadline"
+                            type="date"
+                            defaultValue={formatDateForInput(task.deadline)}
+                            className="bg-secondary border-border text-foreground w-full"
+                        />
                     </div>
                     <Button
                         type="submit"

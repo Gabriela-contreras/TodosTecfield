@@ -17,6 +17,7 @@ export function TaskForm({ updateTasks, onClose }) {
       deadline: e.target.date.value,
     };
 
+    console.log(newTask);
     if (!newTask.title) {
       return error("El título es obligatorio");
     }

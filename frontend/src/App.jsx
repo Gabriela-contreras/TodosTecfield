@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const fetchTasks = async () => {
       const data = await getTasks();
-      setTasks(data);
+      setTasks(data); 
     };
     fetchTasks();
   }, []);
