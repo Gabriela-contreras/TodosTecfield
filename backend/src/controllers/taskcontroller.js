@@ -5,24 +5,6 @@ export const getTasks = async (req, res) => {
   res.json(tasks);
 };
 
-// export const createTask = async (req, res) => {
-//   try {
-//     const { title, status } = req.body
-
-//     const newTask = new Task({
-//       title,
-//       status,
-//       createdAt: new Date(),
-//       deadline: deadline ? new Date(deadline) : null,
-//     })
-//     console.log(newTask);
-//     const savedTask = await newTask.save()
-
-//     res.status(201).json(savedTask)
-//   } catch (error) {
-//     res.status(500).json({ message: "Error creando la tarea" })
-//   }
-// }
 export const createTask = async (req, res) => {
   try {
     const { title, status, deadline } = req.body;
@@ -41,14 +23,14 @@ export const createTask = async (req, res) => {
       title: title.trim(),
       status,
       createdAt: new Date(),
-      deadline: deadline ? new Date(deadline) : new Date(Date.now() + 7*24*60*60*1000) // default 7 días
+      deadline: new Date(deadline) 
     });
 
     const savedTask = await newTask.save();
     res.status(201).json(savedTask);
 
   } catch (error) {
-    console.error("🔥 Error creando la tarea:", error);
+    console.error(" Error creando la tarea:", error);
     res.status(500).json({
       message: error.message,
       errors: error.errors

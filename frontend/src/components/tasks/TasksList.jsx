@@ -92,8 +92,7 @@ export function Task({ arrtasks, setArrtasks }) {
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
+    
     })
   }
 
@@ -105,7 +104,7 @@ export function Task({ arrtasks, setArrtasks }) {
             key={task._id}
             className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 w-full rounded-xl border border-border bg-background p-3 sm:p-4 shadow-sm transition hover:shadow-md"
           >
-            
+
             <div className="flex items-start gap-3 flex-1 min-w-0">
               <input
                 type="checkbox"
@@ -113,25 +112,31 @@ export function Task({ arrtasks, setArrtasks }) {
                 onChange={() =>
                   handleCheckboxChange(task._id, task.status)
                 }
-                className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-primary"
+                className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-primary justify-center items-center"
               />
 
               <div className="flex flex-col gap-2 min-w-0 flex-1 sm:flex-row sm:items-center sm:justify-between">
                 <h3
-                  className={`truncate text-sm sm:text-base font-semibold ${
-                    isCompleted(task.status)
+                  className={`truncate text-sm sm:text-base font-semibold ${isCompleted(task.status)
                       ? "line-through text-muted-foreground"
                       : ""
-                  }`}
+                    }`}
                 >
                   {task.title}
                 </h3>
 
                 <div className="flex flex-wrap items-center gap-3">
-                  <span className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">
+                  <div className="flex flex-col items-center justify-center  gap-2 mx-4">
+                  <span>fecha de creación:</span><span className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">
                     {formatDate(task.createdAt)}
                   </span>
-
+                  </div>
+                  <div className="flex flex-col items-center justify-center  gap-2 mx-4 ">
+                  <span>fecha de entrega:</span>
+                  <span className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">
+                     {formatDate(task.deadline)}
+                  </span>
+                  </div>
                   <span
                     className={`px-2.5 py-0.5 text-xs sm:text-sm rounded-full border capitalize ${getStatusStyle(
                       task.status
@@ -147,11 +152,10 @@ export function Task({ arrtasks, setArrtasks }) {
             <div className="relative self-end sm:self-auto">
               <button
                 onClick={() => handleMenuToggle(task._id)}
-                className={`p-2 rounded-lg transition-colors ${
-                  openMenuId === task._id
+                className={`p-2 rounded-lg transition-colors ${openMenuId === task._id
                     ? "bg-secondary text-foreground"
                     : "text-muted-foreground hover:bg-secondary hover:text-foreground"
-                }`}
+                  }`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

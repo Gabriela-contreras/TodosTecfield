@@ -9,24 +9,61 @@ export function TaskForm({ updateTasks, onClose }) {
   const { success, error } = useNotification()
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const newTask = {
-      title: e.target.title.value,
+      title: e.target.title.value.trim(),
       status: e.target.status.value,
+      deadline: e.target.date.value,
+    };
+
+    if (!newTask.title) {
+      return error("El título es obligatorio");
+    }
+
+    if (!["pendiente", "completada"].includes(newTask.status)) {
+      return error("El estado de la tarea es inválido");
+    }
+
+    if (!validateDeadline(newTask.deadline)) {
+      return;
     }
 
     try {
-      const createdTask = await createTask(newTask)
-      updateTasks((prevTasks) => [...prevTasks, createdTask])
-      success("Tarea creada correctamente")
-      e.target.reset()
-      onClose?.()
+      const createdTask = await createTask(newTask);
+      updateTasks((prevTasks) => [...prevTasks, createdTask]);
+      success("Tarea creada correctamente");
+      e.target.reset();
+      onClose?.();
     } catch (err) {
-      error("Error al crear la tarea")
-      console.error("Error creando la tarea:", err)
+      error("Error al crear la tarea");
+      console.error(" Error creando la tarea:", err);
     }
+  };
+
+
+  const validateDeadline = (deadline) => {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    const deadlineDate = new Date(deadline)
+    deadlineDate.setHours(0, 0, 0, 0)
+    // console.log(today);
+    const nextDay = new Date(deadlineDate.getTime()+ (1 * 24 * 60 * 60 * 1000))
+    // console.log(nextDay);
+    
+
+    if (nextDay < today) {
+      error("La fecha de entrega debe ser mayor a la fecha actual")
+      return false
+    }
+
+    return true
   }
+
+
+
+
   return (
     <Card className="w-full max-w-md bg-background border-none">
       <CardHeader className="space-y-1 text-center">
@@ -46,11 +83,11 @@ export function TaskForm({ updateTasks, onClose }) {
               required
             />
             <label htmlFor="date" className="text-foreground">Fecha de entrega</label>
-            <Input type="date" id="date" className="bg-secondary border-border text-foreground placeholder:text-muted-foreground" required />
+            <Input type="date" id="date" className="bg-secondary border-border text-foreground placeholder:text-muted-foreground" required onChange={(e) => validateDeadline(e.target.value)} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="status" className="text-foreground">Estado</Label>
-           
+
             <select name="status" id="status" className="bg-secondary border-border text-foreground placeholder:text-muted-foreground w-full h-9 rounded-md border px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none">
               <option value="pendiente">Pendiente</option>
               <option value="completada">Completada</option>
