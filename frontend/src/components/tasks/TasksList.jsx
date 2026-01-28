@@ -86,7 +86,10 @@ export function Task({ arrtasks, setArrtasks }) {
   const isCompleted = (status) => status === "completada"
 
   const formatDate = (dateString) => {
-    const date = new Date(dateString)
+    //Se suman 3 horas para compensar la diferencia horaria:
+    // la fecha viene en UTC desde la base de datos y en Argentina (UTC-3)
+    // sin este ajuste se muestra un día anterior
+    const date = new Date(new Date(dateString).getTime() + 3 * 60 * 60 * 1000)
 
     return date.toLocaleDateString("es-AR", {
       day: "2-digit",
@@ -119,16 +122,16 @@ export function Task({ arrtasks, setArrtasks }) {
                     className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-primary justify-center items-center"
                   />
                   <h3
-                  className={`truncate text-sm sm:text-base font-semibold ${isCompleted(task.status)
-                    ? "line-through text-muted-foreground"
-                    : ""
-                    }`}
-                >
-                  {task.title}
-                </h3>
+                    className={`truncate text-sm sm:text-base font-semibold ${isCompleted(task.status)
+                      ? "line-through text-muted-foreground"
+                      : ""
+                      }`}
+                  >
+                    {task.title}
+                  </h3>
                 </div>
 
-                
+
 
                 <div className="flex flex-wrap items-center gap-3">
                   <div className="flex flex-col items-center justify-center  gap-2 mx-4">

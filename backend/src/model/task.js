@@ -23,4 +23,7 @@ const taskSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
+// Índice descendente para optimizar sort({ createdAt: -1 }), dado que se utiliza en getTasks constantemente en el frontend, muy util para gran carga de datos.
+taskSchema.index({ createdAt: -1 })
+
 export default mongoose.model("Task", taskSchema)
