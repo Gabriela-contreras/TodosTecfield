@@ -18,13 +18,11 @@ function App() {
   }, []);
 
   return (
-    <Layout>
-      {/* <TaskForm createTask={setTasks} /> */}
+    <Layout setTasks={setTasks}>
       <div>
         <h1 className="text-2xl font-bold mb-6">Mis Tareas</h1>
-        <Task arrtasks={tasks} />
+        <Task arrtasks={tasks} setArrtasks={setTasks} />
       </div>
-
     </Layout>
   );
 }

@@ -120,7 +120,7 @@ export function Sidebar({ setTasks }) {
             className="w-full max-w-md rounded-xl border border-border bg-background p-6 shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
-            <TaskForm setTasks={setTasks} onClose={closeCreateTask} />
+            <TaskForm updateTasks={setTasks} onClose={closeCreateTask} />
 
             <Button
               variant="ghost"

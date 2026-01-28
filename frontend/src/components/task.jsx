@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react"
-import { getTasks } from "@/services/gettasks"
+import { useState } from "react"
 import { deleteTaskService } from "@/services/deleteTask"
 import { updateTaskService } from "@/services/updateTask"
 
@@ -9,18 +8,8 @@ const statusStyles = {
   hecho: "bg-green-500/10 text-green-400 border-green-500/20",
 }
 
-export function Task() {
-  const [arrtasks, setArrtasks] = useState([])
+export function Task({ arrtasks, setArrtasks }) {
   const [openMenuId, setOpenMenuId] = useState(null)
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const data = await getTasks()
-      setArrtasks(data)
-    }
-
-    fetchTasks()
-  }, [])
 
   const deleteTask = async (id) => {
     await deleteTaskService(id)
