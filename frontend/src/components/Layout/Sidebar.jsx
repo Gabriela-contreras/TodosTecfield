@@ -1,19 +1,10 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Search,
-  Menu,
-  X,
-  Plus,
-  ListTodo,
-  Clock,
-  CheckCircle2,
-  ChevronLeft,
-} from "lucide-react";
+import { Menu, Plus, ListTodo, Clock, CheckCircle2, ChevronLeft } from "lucide-react";
 import { TaskForm } from "../form";
+import SearchFilter from "./SearchFilter";
 
-export function Sidebar({ setTasks }) {
+export function Sidebar({ setTasks, searchTerm, setSearchTerm }) {
   const [open, setOpen] = useState(true);
   const [searchOpen, setSearchOpen] = useState(false);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -58,40 +49,13 @@ export function Sidebar({ setTasks }) {
           </Button>
         </div>
 
-        <div className="px-3 mb-2">
-          {searchOpen && open ? (
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-              <Input
-                placeholder="Buscar tarea..."
-                className="pl-9 bg-secondary border-border text-foreground placeholder:text-muted-foreground"
-                autoFocus
-                onBlur={() => setSearchOpen(false)}
-              />
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute right-1 top-1/2 -translate-y-1/2 size-7 text-muted-foreground hover:text-foreground"
-                onClick={() => setSearchOpen(false)}
-              >
-                <X className="size-4" />
-              </Button>
-            </div>
-          ) : (
-            <Button
-              variant="ghost"
-              onClick={() => setSearchOpen(true)}
-              className={`${
-                open
-                  ? "w-full justify-start"
-                  : "w-12 px-0 justify-center"
-              } text-muted-foreground hover:text-foreground hover:bg-secondary`}
-            >
-              <Search className="size-5" />
-              {open && <span className="ml-3">Buscar</span>}
-            </Button>
-          )}
-        </div>
+        <SearchFilter
+          searchOpen={searchOpen}
+          setSearchOpen={setSearchOpen}
+          open={open}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
 
         <nav className="flex-1 px-3 py-3 flex flex-col gap-1 overflow-y-auto">
           {menuItems.map((item, index) => (
