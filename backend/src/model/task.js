@@ -17,8 +17,8 @@ const taskSchema = new mongoose.Schema(
     },
     deadline: {
       type: Date,
-      required: true,
-    },
+      required: false, // antes era true
+    }
   },
   { timestamps: true }
 )
