@@ -1,7 +1,7 @@
 import Task from "../model/task.js";
 
 export const getTasks = async (req, res) => {
-  const tasks = await Task.find();
+  const tasks = await Task.find().sort({ createdAt: -1 });
   res.json(tasks);
 };
 
@@ -12,6 +12,8 @@ export const createTask = async (req, res) => {
     const newTask = new Task({
       title,
       status,
+      createdAt: new Date(),
+      deadline: new Date(req.body.deadline),
     })
 
     const savedTask = await newTask.save()

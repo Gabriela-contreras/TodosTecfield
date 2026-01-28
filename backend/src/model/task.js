@@ -11,6 +11,14 @@ const taskSchema = new mongoose.Schema(
       enum: ["pendiente", "completada"],
       default: "pendiente",
     },
+    createdAt:{
+      type: Date,
+      required: true,
+    },
+    deadline: {
+      type: Date,
+      required: true,
+    },
   },
   { timestamps: true }
 )

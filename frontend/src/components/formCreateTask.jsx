@@ -3,27 +3,29 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createTask } from "@/services/createtasks"
+import { useNotification } from "@/hooks/useNotification"
 
-export function TaskForm({ updateTasks}) {
-  
+export function TaskForm({ updateTasks, onClose }) {
+  const { success, error } = useNotification()
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-  
+
     const newTask = {
       title: e.target.title.value,
       status: e.target.status.value,
     }
-  
+
     try {
       const createdTask = await createTask(newTask)
-  
       updateTasks((prevTasks) => [...prevTasks, createdTask])
-  
+      success("Tarea creada correctamente")
       e.target.reset()
-    } catch (error) {
-      console.error("Error creando la tarea", error)
+      onClose?.()
+    } catch (err) {
+      error("Error al crear la tarea")
+      console.error("Error creando la tarea:", err)
     }
-    e.target.reset()
   }
   return (
     <Card className="w-full max-w-md bg-background border-none">
@@ -43,6 +45,8 @@ export function TaskForm({ updateTasks}) {
               className="bg-secondary border-border text-foreground placeholder:text-muted-foreground"
               required
             />
+            <label htmlFor="date" className="text-foreground">Fecha de entrega</label>
+            <Input type="date" id="date" className="bg-secondary border-border text-foreground placeholder:text-muted-foreground" required />
           </div>
           <div className="space-y-2">
             <Label htmlFor="status" className="text-foreground">Estado</Label>
