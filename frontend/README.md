@@ -62,6 +62,17 @@ Una vez levantados los contenedores:
 
 --
 
+##Imagenes del Proyecto 
+
+<img src="/frontend/public/images/DesktopMenu.png" alt="iamgen del proyecto">
+<img src="/frontend/public/images/DesktopTasks.png"  alt="iamgen del proyecto">
+<img src="/frontend/public/images/imageDesktoptFilter.png"  alt="iamgen del proyecto">
+<img src="/frontend/public/images/mobileImg.png"  alt="iamgen del proyecto">
+<img src="/frontend/public/images/MobileTasks.png"  alt="iamgen del proyecto">
+
+
+
+
 ## 👩‍💻 Autora
 
 Desarrollado por **Gabriela Contreras** 💻✨
