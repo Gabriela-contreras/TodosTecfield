@@ -133,25 +133,28 @@ export function Task({ arrtasks, setArrtasks }) {
 
 
 
-                <div className="flex flex-wrap items-center gap-3">
-                  <div className="flex flex-col items-center justify-center  gap-2 mx-4">
+                <div className="flex flex-wrap md:items-center  sm:items-start  gap-4">
+                  <div className="flex flex-col md:items-center sm:items-start justify-center  gap-2 mx-4">
                     <span>fecha de creación:</span><span className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">
                       {formatDate(task.createdAt)}
                     </span>
                   </div>
-                  <div className="flex flex-col items-center justify-center  gap-2 mx-4 ">
+                  <div className="flex flex-col md:items-center sm:items-start justify-center  gap-2 mx-4 ">
                     <span>fecha de entrega:</span>
                     <span className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">
                       {formatDate(task.deadline)}
                     </span>
                   </div>
-                  <span
-                    className={`px-2.5 py-0.5 text-xs sm:text-sm rounded-full border capitalize ${getStatusStyle(
-                      task.status
-                    )}`}
-                  >
-                    {task.status}
-                  </span>
+                  <div className="flex flex-col items-center justify-center  gap-2 mx-4 ">
+                    <span
+                      className={`px-2.5 py-0.5 text-xs sm:text-sm sm:block rounded-full border capitalize ${getStatusStyle(
+                        task.status
+                      )}`}
+                    >
+                      {task.status}
+                    </span> 
+                  </div>
+
                 </div>
               </div>
             </div>

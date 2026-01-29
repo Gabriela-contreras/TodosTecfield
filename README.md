@@ -60,7 +60,7 @@ Una vez levantados los contenedores:
 * 🔄 Cambiar estado de tareas (pendiente / completada)
 
 
---##Imagenes del Proyecto 
+##Imagenes del Proyecto 
 
 <img src="/frontend/public/images/DesktopMenu.png" alt="iamgen del proyecto">
 <img src="/frontend/public/images/DesktopTasks.png"  alt="iamgen del proyecto">
