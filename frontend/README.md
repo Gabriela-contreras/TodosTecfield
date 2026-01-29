@@ -68,7 +68,6 @@ Una vez levantados los contenedores:
 <img src="/frontend/public/images/DesktopTasks.png"  alt="iamgen del proyecto">
 <img src="/frontend/public/images/imageDesktoptFilter.png"  alt="iamgen del proyecto">
 <img src="/frontend/public/images/mobileImg.png"  alt="iamgen del proyecto">
-<img src="/frontend/public/images/MobileTasks.png"  alt="iamgen del proyecto">
 
 
 
